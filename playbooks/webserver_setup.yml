@@ -1,0 +1,43 @@
+---
+# Web sunucuları için temel yapılandırma playbook'u
+- name: Web sunucularını yapılandır
+  hosts: webservers
+  become: true
+  vars:
+    http_port: 80
+    https_port: 443
+    app_environment: production
+
+  tasks:
+    - name: Nginx paketini yükle
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Nginx servisini başlat ve boot'ta otomatik başlatılmasını sağla
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+        
+    - name: Firewall'da HTTP ve HTTPS portlarını aç
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      with_items:
+        - "{{ http_port }}"
+        - "{{ https_port }}"
+        
+    - name: Nginx yapılandırma dosyasını kopyala
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      notify: Nginx'i yeniden başlat
+      
+  handlers:
+    - name: Nginx'i yeniden başlat
+      service:
+        name: nginx
+        state: restarted 

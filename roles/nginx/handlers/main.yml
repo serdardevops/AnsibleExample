@@ -1,0 +1,7 @@
+---
+# Nginx rolü için handler tanımlamaları
+
+- name: Nginx'i yeniden başlat
+  service:
+    name: nginx
+    state: restarted 

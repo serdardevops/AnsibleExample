@@ -1,0 +1,28 @@
+---
+# Web sunucuları için grup değişkenleri
+
+# Sistem ayarları
+ansible_user: ansible
+ansible_become: true
+ansible_become_method: sudo
+
+# Nginx ayarları
+nginx_http_port: 80
+nginx_https_port: 443
+nginx_server_name: webserver.example.com
+nginx_conf_template: nginx.conf.j2
+
+# Firewall ayarları
+firewall_allowed_tcp_ports:
+  - 22
+  - 80
+  - 443
+
+# NTP ayarları
+ntp_servers:
+  - 0.tr.pool.ntp.org
+  - 1.tr.pool.ntp.org
+
+# Log ayarları
+log_level: warn
+log_rotation_days: 14 

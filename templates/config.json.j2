@@ -1,0 +1,38 @@
+{
+  "app": {
+    "name": "{{ app_name | default('myapp') }}",
+    "version": "{{ app_version | default('1.0.0') }}",
+    "environment": "{{ environment | default('development') }}"
+  },
+  "server": {
+    "host": "{{ server_host | default('localhost') }}",
+    "port": {{ server_port | default(8080) }},
+    "ssl_enabled": {{ ssl_enabled | default(false) | lower }},
+    {% if ssl_enabled | default(false) %}
+    "ssl_cert": "{{ ssl_cert_path }}",
+    "ssl_key": "{{ ssl_key_path }}",
+    {% endif %}
+    "max_connections": {{ max_connections | default(100) }}
+  },
+  "database": {
+    "host": "{{ db_host | default('localhost') }}",
+    "port": {{ db_port | default(5432) }},
+    "name": "{{ db_name | default('mydb') }}",
+    "user": "{{ db_user | default('admin') }}",
+    "password": "{{ db_password | default('changeme') }}",
+    "pool_size": {{ db_pool_size | default(10) }}
+  },
+  "logging": {
+    "level": "{{ log_level | default('info') }}",
+    "file": "{{ log_file | default('/var/log/myapp.log') }}",
+    "max_size": "{{ log_max_size | default('100MB') }}",
+    "max_files": {{ log_max_files | default(10) }}
+  },
+  "features": {
+    {% for feature, enabled in features.items() | default({}) %}
+    "{{ feature }}": {{ enabled | lower }}{% if not loop.last %},{% endif %}
+    {% else %}
+    "example_feature": false
+    {% endfor %}
+  }
+}

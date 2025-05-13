@@ -1,0 +1,25 @@
+---
+# web1.example.com için özel değişkenler
+
+# Sunucu bilgileri
+server_id: web01
+server_role: frontend
+# environment: production
+
+# Donanım ayarları
+ram_limit: 4096
+cpu_limit: 2
+
+# Web sunucusu ayarları
+nginx_worker_processes: 4
+nginx_worker_connections: 2048
+nginx_server_name: web1.example.com
+
+# SSL sertifika bilgileri
+ssl_cert_path: /etc/ssl/certs/web1.crt
+ssl_key_path: /etc/ssl/private/web1.key
+
+# Backup ayarları
+backup_enabled: true
+backup_schedule: "0 2 * * *"
+backup_retention_days: 30 

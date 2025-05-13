@@ -1,0 +1,28 @@
+---
+# Nginx kurulumu ve yapılandırması için görevler
+
+- name: Nginx paketini yükle
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Nginx servisini başlat ve boot'ta otomatik başlatılmasını sağla
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Varsayılan web sayfasını oluştur
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Nginx yapılandırma dosyasını kopyala
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify: Nginx'i yeniden başlat 

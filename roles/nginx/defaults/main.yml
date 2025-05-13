@@ -1,0 +1,14 @@
+---
+# Nginx için varsayılan değişkenler
+
+# Port yapılandırması
+nginx_http_port: 80
+nginx_https_port: 443
+
+# Worker ayarları
+nginx_worker_processes: auto
+nginx_worker_connections: 1024
+
+# Varsayılan sunucu adı
+nginx_server_name: example.com
+nginx_root_dir: /var/www/html 
