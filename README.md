@@ -124,5 +124,3 @@ Bu Ansible yapısı ile:
 - Karmaşık altyapı görevlerini basitleştirebilirsiniz
 
 ---
-
-**Not**: Bu README'de gösterilen resim, `images/ansible_structure.png` konumunda saklanmaktadır.
